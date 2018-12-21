@@ -22,6 +22,7 @@ public class ProductTest {
 		int status1 = remo.remove(6);
 		System.out.println(status1);
 		
-		
+		int status3=dao.update(new Product(1,"Redmi",17000)); 
+	    System.out.println(status3); 
 }
 }
