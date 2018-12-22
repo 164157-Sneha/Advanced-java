@@ -6,7 +6,7 @@ import com.Shophub2.Bean.Product;
 import com.Shophub2.Bean.User;
 
 public interface IProductDAO {
-	public Product get(long productId);
+	public List<Product> get(long productId);
 
 	public List<Product> getAll();
 

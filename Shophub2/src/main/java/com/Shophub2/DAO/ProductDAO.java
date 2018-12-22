@@ -22,15 +22,13 @@ private JdbcTemplate jdbcTemplate;
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	public Product get(long productId) {
-		//String orac = "select * from Product where productId = " + productId;
-	//	return (Product)jdbcTemplate.queryForObject(orac, new ProductDAO());
-		/*Product product = (Product)jdbcTemplate.queryForObject(orac, new Object[]{productId}, new BeanPropertyRowMapper(Product.class));
-	      if(product!=null)
-	      return product;*/
-	      return null;
+	public List<Product> get(long productId) {
+		
+			String sql="select * from Product where productId='" + productId + "' ";
+			List <Product> product = jdbcTemplate.query(sql, new ProductMapper());
+			return product;
+		}
 	
-	}
 
 
 	public List<Product> getAll(){  

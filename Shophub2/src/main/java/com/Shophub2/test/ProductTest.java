@@ -1,9 +1,5 @@
 package com.Shophub2.test;
-
-import java.sql.ResultSet;
 import java.util.List;
-
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -20,7 +16,7 @@ public class ProductTest {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 
      	ProductDAO dao = ctx.getBean(ProductDAO.class);
-		long status = dao.add(new Product(6, "Oneplus",35000));
+		long status = dao.add(new Product(8, "Samsung",15000));
 		System.out.println(status);
 	
 		/*
@@ -30,14 +26,19 @@ public class ProductTest {
 	
 		int status3=dao.update(6,"Oppo",20000); 
 	    System.out.println(status3);
-		*/
+		
      	
      	 List<Product> list=dao.getAll();  
          System.out.println(list);
-        /* for(Product product:list) { 
+         for(Product product:list) { 
              System.out.println(product); 
         }*/
+         
+         List<Product> list2=dao.get(7);  
+         for(Product product:list2) { 
+             System.out.println(product); 
 	}
+}
 }
 
 
