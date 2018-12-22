@@ -6,7 +6,7 @@ import com.Shophub2.Bean.Product;
 import com.Shophub2.Bean.User;
 
 public interface IProductDAO {
-	public String get(long productId);
+	public Product get(long productId);
 
 	public List<Product> getAll();
 
@@ -14,7 +14,7 @@ public interface IProductDAO {
 
 	public int remove(int productId);
 
-	public int update(Product product);
+	public int update(long productId, String productName,double price);
 
 	public boolean contains(long productId, String productName);
 }

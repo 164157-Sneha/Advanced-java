@@ -6,6 +6,11 @@ public class Product {
 	private String productName;
 	private double productPrice;
 
+	
+	public Product() {
+		super();
+	}
+
 	public Product(long productId, String productName, double productPrice) {
 		super();
 		this.productId = productId;
@@ -37,4 +42,11 @@ public class Product {
 		this.productPrice = productPrice;
 	}
 
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", productName=" + productName + ", productPrice=" + productPrice
+				+ "]";
+	}
+
+	
 }

@@ -2,15 +2,16 @@ package com.Shophub2.DAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.dao.DataAccessException;
+
+
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ResultSetExtractor;
+
 import org.springframework.jdbc.core.RowMapper;
 
 import com.Shophub2.Bean.Product;
+import com.Shophub2.mapper.ProductMapper;
 
 public class ProductDAO implements IProductDAO {
 
@@ -21,34 +22,28 @@ private JdbcTemplate jdbcTemplate;
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	public String get(long productId) {
-		String orac = "select * from Student where productId = ?";
-		String product = jdbcTemplate.queryForObject(orac, 
-	         new Object[]{productId}, new RowMapper());
-	      
-	      return product;
+	public Product get(long productId) {
+		//String orac = "select * from Product where productId = " + productId;
+	//	return (Product)jdbcTemplate.queryForObject(orac, new ProductDAO());
+		/*Product product = (Product)jdbcTemplate.queryForObject(orac, new Object[]{productId}, new BeanPropertyRowMapper(Product.class));
+	      if(product!=null)
+	      return product;*/
+	      return null;
 	
 	}
 
-	public List<Product> getAll() {
-			/*String jdbcTemplate.query("select * from products",new ResultSetExtractor<List<Product>>() 
-				
-				public List<Product> extractData(ResultSet rs)throws SQLException, DataAccessException {
 
-								List<Product> list = new ArrayList<Product>();
-								while (rs.next()) {
-									Product product = new Product(0, null, 0);
-									product.setProductId(rs.getInt(1));
-									product.setProductName(rs.getString(2));
-									product.setProductPrice(rs.getDouble(3));
-
-									list.add(product);
-								}
-								return list;
-				}*/
-		return null;
-	}
-
+	public List<Product> getAll(){  
+		String sql="select * from Product";
+		List<Product> product=jdbcTemplate.query(sql, new ProductMapper());
+		if(product==null)
+		System.out.println("null");
+		else
+			System.out.println("not null");
+		return product!=null?product:null;
+		}
+	
+	
 	public long add(Product product) {
 		 String query="insert into Product values('"+product.getProductId()+"','"+product.getProductName()+"','"+product.getProductPrice()+"')";  
 		    return jdbcTemplate.update(query); 
@@ -59,8 +54,8 @@ private JdbcTemplate jdbcTemplate;
 	    return jdbcTemplate.update(query);  
 	}
 
-	public int update(Product product) {
-		String query="update Product set productName='"+product.getProductName()+"',productPrice='"+product.getProductPrice()+"' where ProductId='"+product.getProductId()+"' ";  
+	public int update(long productId, String productName,double productPrice) {
+		String query="update Product set ProductName='"+productName+"',ProductPrice='"+productPrice+"' where ProductId='"+productId+"' ";  
 	    return jdbcTemplate.update(query);  
 	}
 
@@ -68,5 +63,11 @@ private JdbcTemplate jdbcTemplate;
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return "ProductDAO [jdbcTemplate=" + jdbcTemplate + "]";
+	}
+
 
 }
