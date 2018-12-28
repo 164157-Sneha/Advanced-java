@@ -1,0 +1,286 @@
+Microsoft Windows [Version 10.0.16299.726]
+(c) 2017 Microsoft Corporation. All rights reserved.
+
+C:\Users\snehaas>"C:\Program Files\MongoDB\Server\4.0\bin\mongo.exe"
+MongoDB shell version v4.0.5
+connecting to: mongodb://127.0.0.1:27017/?gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("93037706-74e4-47bb-bc58-d0a94474437b") }
+MongoDB server version: 4.0.5
+Server has startup warnings:
+2018-12-26T23:44:57.473-0700 I CONTROL  [initandlisten]
+2018-12-26T23:44:57.473-0700 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2018-12-26T23:44:57.473-0700 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2018-12-26T23:44:57.474-0700 I CONTROL  [initandlisten]
+---
+Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+and anyone you share the URL with. MongoDB may use this information to make product
+improvements and to suggest MongoDB products and deployment options to you.
+
+To enable free monitoring, run the following command: db.enableFreeMonitoring()
+To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+
+> use users
+switched to db users
+> db.user.insert({"username" : "GoodGuyGreg", "first_name" : "Good Guy", "last_name" : "Greg", "username" : "ScumbagSteve", "full_name" : ["first" : "Scumbag", "last" : "Steve"]})
+2018-12-27T15:58:23.143+0530 E QUERY    [js] SyntaxError: missing ] after element list @(shell):1:145
+> db.user.insert({"username" : "GoodGuyGreg", "first_name" : "Good Guy", "last_name" : "Greg", "username" : "ScumbagStev, "full_name" : ["first" : "Scumbag", "last" : "Steve"]})
+2018-12-27T16:01:46.976+0530 E QUERY    [js] SyntaxError: missing } after property list @(shell):1:121
+> db.user.insert({"username": "ScumbagSteve", "full_name": [" first : Scumbag"," last : Steve"}});
+2018-12-27T16:04:58.858+0530 E QUERY    [js] SyntaxError: missing ] after element list @(shell):1:92
+> db.user.insert({"username": "ScumbagSteve", "full_name": [" first : Scumbag"," last : Steve"]});
+WriteResult({ "nInserted" : 1 })
+> db.user.find().pretty();
+{
+        "_id" : ObjectId("5c24aadf2b97e089ba49e0f9"),
+        "username" : "ScumbagSteve",
+        "full_name" : [
+                " first : Scumbag",
+                " last : Steve"
+        ]
+}
+> db.user.insert({"username": "ScumbagSteve", "full_name": [" "first" : "Scumbag"","" last" : "Steve""]});
+2018-12-27T16:06:33.834+0530 E QUERY    [js] SyntaxError: missing ] after element list @(shell):1:61
+> db.user.insert({"username" : "GoodGuyGreg", "first_name" : "Good Guy", "last_name" : "Greg"})
+WriteResult({ "nInserted" : 1 })
+> db.user.find().pretty();
+{
+        "_id" : ObjectId("5c24aadf2b97e089ba49e0f9"),
+        "username" : "ScumbagSteve",
+        "full_name" : [
+                " first : Scumbag",
+                " last : Steve"
+        ]
+}
+{
+        "_id" : ObjectId("5c24ab702b97e089ba49e0fa"),
+        "username" : "GoodGuyGreg",
+        "first_name" : "Good Guy",
+        "last_name" : "Greg"
+}
+> db.posts.insert({"username" : "GoodGuyGreg", "title" : "Passes out at party", "body" : "Wakes up early and cleans house"});
+WriteResult({ "nInserted" : 1 })
+> db.posts.insert({"username" : "GoodGuyGreg", "title" : "Steals your identity", "body" : "Raises your credit score"});
+WriteResult({ "nInserted" : 1 })
+> db.posts.find().pretty();
+{
+        "_id" : ObjectId("5c24bab32b97e089ba49e0fb"),
+        "username" : "GoodGuyGreg",
+        "title" : "Passes out at party",
+        "body" : "Wakes up early and cleans house"
+}
+{
+        "_id" : ObjectId("5c24baea2b97e089ba49e0fc"),
+        "username" : "GoodGuyGreg",
+        "title" : "Steals your identity",
+        "body" : "Raises your credit score"
+}
+> db.posts.insert({"username" : "GoodGuyGreg", "title" : "Reports a bug in your code", "body" : "Sends you a Pull Request"});
+WriteResult({ "nInserted" : 1 })
+> db.posts.insert({"username" : "ScumbagSteve", "title" : "Borrows something", "body" : "Sells it"});
+WriteResult({ "nInserted" : 1 })
+> db.posts.insert({"username" : "ScumbagSteve", "title" : "Borrows everything", "body" : "The end"});
+WriteResult({ "nInserted" : 1 })
+> db.posts.insert({"username" : "ScumbagSteve", "title" : "Forks your repo on github", "body" : "Sets to private"});
+WriteResult({ "nInserted" : 1 })
+> db.posts.find().pretty();
+{
+        "_id" : ObjectId("5c24bab32b97e089ba49e0fb"),
+        "username" : "GoodGuyGreg",
+        "title" : "Passes out at party",
+        "body" : "Wakes up early and cleans house"
+}
+{
+        "_id" : ObjectId("5c24baea2b97e089ba49e0fc"),
+        "username" : "GoodGuyGreg",
+        "title" : "Steals your identity",
+        "body" : "Raises your credit score"
+}
+{
+        "_id" : ObjectId("5c24bb342b97e089ba49e0fd"),
+        "username" : "GoodGuyGreg",
+        "title" : "Reports a bug in your code",
+        "body" : "Sends you a Pull Request"
+}
+{
+        "_id" : ObjectId("5c24bb612b97e089ba49e0fe"),
+        "username" : "ScumbagSteve",
+        "title" : "Borrows something",
+        "body" : "Sells it"
+}
+{
+        "_id" : ObjectId("5c24bb8d2b97e089ba49e0ff"),
+        "username" : "ScumbagSteve",
+        "title" : "Borrows everything",
+        "body" : "The end"
+}
+{
+        "_id" : ObjectId("5c24bbbf2b97e089ba49e100"),
+        "username" : "ScumbagSteve",
+        "title" : "Forks your repo on github",
+        "body" : "Sets to private"
+}
+> db.comments.insert({username : GoodGuyGreg comment : Hope you got a good deal! post : [post_obj_id]
+...
+...
+>
+>  db.comments.insertMany([{username : "GoodGuyGreg" ,comment : "Hope you got a good deal!",post : ObjectId("5c24bab32b97e089ba49e0fb")},{username : "GoodGuyGreg" ,comment : "What's mine is yours!",post : ObjectId("5c24baea2b97e089ba49e0fc")},{username : "GoodGuyGreg" ,comment : "Don't violate the licensing agreement!", post : ObjectId("5c24bb342b97e089ba49e0fd")},{username : "ScumbagSteve", comment : "It still isn't clean",post :  ObjectId("5c24bb612b97e089ba49e0fe") },{username : "ScumbagSteve" ,comment : "Denied your PR cause I found a hack" ,post :  ObjectId("5c24bb8d2b97e089ba49e0ff") }]);
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("5c24c2952b97e089ba49e101"),
+                ObjectId("5c24c2952b97e089ba49e102"),
+                ObjectId("5c24c2952b97e089ba49e103"),
+                ObjectId("5c24c2952b97e089ba49e104"),
+                ObjectId("5c24c2952b97e089ba49e105")
+        ]
+}
+> db.comments.find().pretty();
+{
+        "_id" : ObjectId("5c24c2952b97e089ba49e101"),
+        "username" : "GoodGuyGreg",
+        "comment" : "Hope you got a good deal!",
+        "post" : ObjectId("5c24bab32b97e089ba49e0fb")
+}
+{
+        "_id" : ObjectId("5c24c2952b97e089ba49e102"),
+        "username" : "GoodGuyGreg",
+        "comment" : "What's mine is yours!",
+        "post" : ObjectId("5c24baea2b97e089ba49e0fc")
+}
+{
+        "_id" : ObjectId("5c24c2952b97e089ba49e103"),
+        "username" : "GoodGuyGreg",
+        "comment" : "Don't violate the licensing agreement!",
+        "post" : ObjectId("5c24bb342b97e089ba49e0fd")
+}
+{
+        "_id" : ObjectId("5c24c2952b97e089ba49e104"),
+        "username" : "ScumbagSteve",
+        "comment" : "It still isn't clean",
+        "post" : ObjectId("5c24bb612b97e089ba49e0fe")
+}
+{
+        "_id" : ObjectId("5c24c2952b97e089ba49e105"),
+        "username" : "ScumbagSteve",
+        "comment" : "Denied your PR cause I found a hack",
+        "post" : ObjectId("5c24bb8d2b97e089ba49e0ff")
+}
+> db.posts.find({"username" : "GoodGuyGreg"});
+{ "_id" : ObjectId("5c24bab32b97e089ba49e0fb"), "username" : "GoodGuyGreg", "title" : "Passes out at party", "body" : "Wakes up early and cleans house" }
+{ "_id" : ObjectId("5c24baea2b97e089ba49e0fc"), "username" : "GoodGuyGreg", "title" : "Steals your identity", "body" : "Raises your credit score" }
+{ "_id" : ObjectId("5c24bb342b97e089ba49e0fd"), "username" : "GoodGuyGreg", "title" : "Reports a bug in your code", "body" : "Sends you a Pull Request" }
+> db.posts.find({"username" : "GoodGuyGreg"}).pretty();
+{
+        "_id" : ObjectId("5c24bab32b97e089ba49e0fb"),
+        "username" : "GoodGuyGreg",
+        "title" : "Passes out at party",
+        "body" : "Wakes up early and cleans house"
+}
+{
+        "_id" : ObjectId("5c24baea2b97e089ba49e0fc"),
+        "username" : "GoodGuyGreg",
+        "title" : "Steals your identity",
+        "body" : "Raises your credit score"
+}
+{
+        "_id" : ObjectId("5c24bb342b97e089ba49e0fd"),
+        "username" : "GoodGuyGreg",
+        "title" : "Reports a bug in your code",
+        "body" : "Sends you a Pull Request"
+}
+> db.posts.find({"username" : "ScumbagSteve"}).pretty();
+{
+        "_id" : ObjectId("5c24bb612b97e089ba49e0fe"),
+        "username" : "ScumbagSteve",
+        "title" : "Borrows something",
+        "body" : "Sells it"
+}
+{
+        "_id" : ObjectId("5c24bb8d2b97e089ba49e0ff"),
+        "username" : "ScumbagSteve",
+        "title" : "Borrows everything",
+        "body" : "The end"
+}
+{
+        "_id" : ObjectId("5c24bbbf2b97e089ba49e100"),
+        "username" : "ScumbagSteve",
+        "title" : "Forks your repo on github",
+        "body" : "Sets to private"
+}
+> db.comments.find({"username" : "GoodGuyGreg"}).pretty();
+{
+        "_id" : ObjectId("5c24c2952b97e089ba49e101"),
+        "username" : "GoodGuyGreg",
+        "comment" : "Hope you got a good deal!",
+        "post" : ObjectId("5c24bab32b97e089ba49e0fb")
+}
+{
+        "_id" : ObjectId("5c24c2952b97e089ba49e102"),
+        "username" : "GoodGuyGreg",
+        "comment" : "What's mine is yours!",
+        "post" : ObjectId("5c24baea2b97e089ba49e0fc")
+}
+{
+        "_id" : ObjectId("5c24c2952b97e089ba49e103"),
+        "username" : "GoodGuyGreg",
+        "comment" : "Don't violate the licensing agreement!",
+        "post" : ObjectId("5c24bb342b97e089ba49e0fd")
+}
+> db.comments.find({"username" : "ScumbagSteve"}).pretty();
+{
+        "_id" : ObjectId("5c24c2952b97e089ba49e104"),
+        "username" : "ScumbagSteve",
+        "comment" : "It still isn't clean",
+        "post" : ObjectId("5c24bb612b97e089ba49e0fe")
+}
+{
+        "_id" : ObjectId("5c24c2952b97e089ba49e105"),
+        "username" : "ScumbagSteve",
+        "comment" : "Denied your PR cause I found a hack",
+        "post" : ObjectId("5c24bb8d2b97e089ba49e0ff")
+}
+> db.comments.find().pretty();
+{
+        "_id" : ObjectId("5c24c2952b97e089ba49e101"),
+        "username" : "GoodGuyGreg",
+        "comment" : "Hope you got a good deal!",
+        "post" : ObjectId("5c24bab32b97e089ba49e0fb")
+}
+{
+        "_id" : ObjectId("5c24c2952b97e089ba49e102"),
+        "username" : "GoodGuyGreg",
+        "comment" : "What's mine is yours!",
+        "post" : ObjectId("5c24baea2b97e089ba49e0fc")
+}
+{
+        "_id" : ObjectId("5c24c2952b97e089ba49e103"),
+        "username" : "GoodGuyGreg",
+        "comment" : "Don't violate the licensing agreement!",
+        "post" : ObjectId("5c24bb342b97e089ba49e0fd")
+}
+{
+        "_id" : ObjectId("5c24c2952b97e089ba49e104"),
+        "username" : "ScumbagSteve",
+        "comment" : "It still isn't clean",
+        "post" : ObjectId("5c24bb612b97e089ba49e0fe")
+}
+{
+        "_id" : ObjectId("5c24c2952b97e089ba49e105"),
+        "username" : "ScumbagSteve",
+        "comment" : "Denied your PR cause I found a hack",
+        "post" : ObjectId("5c24bb8d2b97e089ba49e0ff")
+}
+> db.comments.find({post: db.posts.findOne({"title" : "Reports a bug in your code"})._id})
+{ "_id" : ObjectId("5c24c2952b97e089ba49e103"), "username" : "GoodGuyGreg", "comment" : "Don't violate the licensing agreement!", "post" : ObjectId("5c24bb342b97e089ba49e0fd") }
+> db.comments.find({post: db.posts.findOne({"title" : "Reports a bug in your code"})._id}).pretty()
+{
+        "_id" : ObjectId("5c24c2952b97e089ba49e103"),
+        "username" : "GoodGuyGreg",
+        "comment" : "Don't violate the licensing agreement!",
+        "post" : ObjectId("5c24bb342b97e089ba49e0fd")
+}
+>
